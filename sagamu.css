@@ -48,7 +48,6 @@ img { display: block; max-width: 100%; }
 
 #site-header {
     background: var(--bg-white);
-    border-bottom: 3px solid var(--yellow);
     padding: 0;
 }
 
@@ -91,8 +90,8 @@ img { display: block; max-width: 100%; }
     font-weight: 700;
     font-size: 0.8rem;
     color: var(--text);
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
     padding: 14px 11px 11px;
     display: block;
     border-bottom: 3px solid transparent;
