@@ -1,0 +1,356 @@
+body{
+	margin:0px;
+}
+
+#myheader{
+	text-align:center;
+	border-bottom:15px solid #ffcf21;
+}
+#myheader button{
+	color:white;
+	background:#00BAFF;
+	border:none;
+}
+#myheader>span{
+	font-size:350%;
+	font-family:'Lucida Casual';
+	font-weight:bold;
+	letter-spacing:3px;
+}
+
+#mainnav{
+	border-bottom:1px solid #ddd;
+	border-top:1px solid #ddd;
+	padding:0 12%;
+	display:flex;
+	background:#fff;
+	position:sticky;
+	top:0;
+	z-index:100;
+}
+#mainnav a{
+	text-decoration:none;
+	font-weight:700;
+	color:#2a2a2a;
+	font-size:82%;
+	padding:14px 0;
+	margin-right:28px;
+	display:block;
+	text-transform:uppercase;
+	letter-spacing:0.8px;
+	font-family:"Graphik Web",HelveticaNeueBold,HelveticaNeue-Bold,"Helvetica Neue Bold",HelveticaBold,Helvetica-Bold,"Helvetica Bold",HelveticaNeue,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	border-bottom:3px solid transparent;
+	box-sizing:border-box;
+}
+#mainnav a:hover,
+#mainnav a.nav-active{
+	color:#e56010;
+	border-bottom:3px solid #e56010;
+}
+
+#search{
+	display:inline;
+	float:right;
+	height:50px;
+	position:relative;
+	top:15px;
+}
+#search div{
+	border-spacing:0px;
+	display:inline;
+}
+#search div input, #search div button{
+	height:100%;
+	margin:0px;
+	padding:0px;
+}
+
+
+#social{
+	margin-left:0px;
+	font-weight:bold;
+	font-size:50px;
+	line-height:1.15;
+}
+#quick{
+	margin-top:-20px;
+	color:#999;
+	font-weight:bold;
+	font-size:1.8em;
+}
+#move>div>a{
+	text-decoration:none;
+	font-weight:800;
+	color:#e56010;
+	font-size:80%;
+}
+#move{
+	font-family:"Graphik Web",HelveticaNeueBold,HelveticaNeue-Bold,"Helvetica Neue Bold",HelveticaBold,Helvetica-Bold,"Helvetica Bold",HelveticaNeue,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	margin-left:12%;
+	margin-right:12%;
+}
+#move div span{
+	color:#aaa;
+	font-weight:bold;
+	font-family:"Graphik Web",HelveticaNeueBold,HelveticaNeue-Bold,"Helvetica Neue Bold",HelveticaBold,Helvetica-Bold,"Helvetica Bold",HelveticaNeue,"Helvetica Neue",Helvetica,Arial,sans-serif;
+
+}
+#move>div>img{
+	display:block;
+	width:100%;
+	max-width:760px;
+	height:auto;
+	margin-bottom:10px;
+}
+#move>div>a>button{
+	border:none;
+	border-radius:4px;
+	width:120px;
+	height:35px;
+	font-weight:800;
+	margin-bottom:20px;
+	outline-style:none;
+}
+#move>div button:hover{
+	cursor:pointer;
+}
+#sbtn{
+	background:#3b5998;
+	color:white;
+}
+#sbtn:hover{
+	background:#355289;
+}
+#pbtn{
+	background:#cb2027;
+	color:white;
+}
+#pbtn:hover{
+	background:#b11d26;
+}
+#ebtn{
+	color:white;
+	background:#848484;
+}
+#ebtn:hover{
+	background:#666;
+}
+#prbtn{
+	background:none;
+	color:black;
+	outline-style:none;
+	margin-left:30%;
+}
+#prbtn:hover{
+	cursor:pointer;
+	color:#e56010;
+}
+.fr{
+	float:right;
+}
+.fl{
+	float:left;
+}
+#bu-ln{
+	text-decoration-color:#005D7F;
+	font-weight:bold;
+}
+#bu-ln:hover{
+	color:#005d7f;
+	cursor:pointer;
+	text-decoration:none;
+}
+.bold{
+	color:#005d7f;
+}
+.bold:hover{
+	text-decoration:none;
+	cursor:pointer;
+}
+p{
+	color:#111;
+}
+#mark{
+	text-align:center;
+	background-color:#666;
+	padding:30px 20px 40px;
+	color:white;
+	font-weight:bold;
+	font-size:120%;
+	font-family:"Graphik Web",HelveticaNeueBold,HelveticaNeue-Bold,"Helvetica Neue Bold",HelveticaBold,Helvetica-Bold,"Helvetica Bold",HelveticaNeue,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+#footer-nav{
+	margin-bottom:24px;
+	padding-bottom:24px;
+	border-bottom:1px solid #888;
+}
+#footer-nav a{
+	text-decoration:none;
+	color:#ccc;
+	font-size:80%;
+	margin:0 12px;
+	letter-spacing:0.8px;
+	font-family:"Graphik Web",HelveticaNeueBold,HelveticaNeue-Bold,"Helvetica Neue Bold",HelveticaBold,Helvetica-Bold,"Helvetica Bold",HelveticaNeue,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	text-transform:uppercase;
+	font-weight:700;
+}
+#footer-nav a:hover{
+	color:#ffcf21;
+}
+#bigimgdiv{
+	background-color:#eee;
+	padding:40px 0 50px;
+}
+#more-label{
+	text-align:center;
+	font-size:72%;
+	font-weight:800;
+	letter-spacing:4px;
+	color:#888;
+	margin:0 0 28px 0;
+	font-family:"Graphik Web",HelveticaNeueBold,HelveticaNeue-Bold,"Helvetica Neue Bold",HelveticaBold,Helvetica-Bold,"Helvetica Bold",HelveticaNeue,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	text-transform:uppercase;
+}
+#smallimgdiv{
+	width:90%;
+	max-width:1000px;
+	margin:0 auto;
+	display:flex;
+	gap:20px;
+	flex-wrap:wrap;
+	justify-content:center;
+	align-items:flex-start;
+}
+.imgbtn{
+	background-color:white;
+	padding:10px;
+	border:none;
+	cursor:pointer;
+	vertical-align:top;
+}
+.card_title{
+	color:black;
+	text-align:left;
+	font-weight:bolder;
+	font-size:140%;
+}
+.imgbtn:hover .card_title{
+	color:rgb(250, 91, 15);
+	text-decoration:none;
+}
+.imgbtn:hover a{
+	text-decoration:none;
+}
+.imgbtn a{
+	text-decoration-color:rgba(190,102,0,.6);
+}
+#key{
+	text-align:right;
+}
+#fff{
+	color:#17276a;
+	text-decoration:none;
+
+}
+.xyz{
+	color:white;
+	text-decoration:none;
+
+}
+.xyz:hover{
+	color:darkblue;
+}
+#content{
+	color:#2a2a2a;
+	font-family:calibri;
+	font-size:20px;
+	width:78%;
+	max-width:700px;
+	line-height:1.75;
+}
+#content p{
+	margin-bottom:1.3em;
+}
+#content h3{
+	margin-top:1.8em;
+	margin-bottom:0.4em;
+	font-size:1.2em;
+}
+#content ul{
+	line-height:1.75;
+	padding-left:1.5em;
+	margin-top:0;
+	margin-bottom:1.3em;
+}
+#content ul li{
+	margin-bottom:0.4em;
+}
+#article-tags{
+	margin-top:2.5em;
+	padding-top:1em;
+	border-top:1px solid #ddd;
+}
+#article-tags a{
+	display:inline-block;
+	color:#e56010;
+	font-weight:700;
+	font-size:80%;
+	text-decoration:none;
+	margin-right:14px;
+	letter-spacing:0.5px;
+	font-family:"Graphik Web",HelveticaNeueBold,HelveticaNeue-Bold,"Helvetica Neue Bold",HelveticaBold,Helvetica-Bold,"Helvetica Bold",HelveticaNeue,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	text-transform:uppercase;
+}
+#article-tags a:hover{
+	text-decoration:underline;
+}
+
+
+
+
+/* Normal desktop :400px. */
+@media (min-width: 680px) and (max-width: 991px) {
+	#myheader{
+		text-align:center;
+		border-bottom:15px solid #ffcf21;
+	}
+	#myheader button{
+		color:white;
+		background:#00BAFF;
+		border:none;
+	}
+	#myheader>span{
+		font-size:430%;
+		font-family:'Lucida Casual';
+		font-weight:bold;
+		letter-spacing:3px;
+	}
+	#mainnav{
+		padding:0 5%;
+	}
+	#content{
+		color:#2a2a2a;
+		font-family:calibri;
+		font-size:40px;
+		width:90%;
+	}
+	#smallimgdiv{
+		display:none;
+	}
+	#sbtn, #pbtn, #ebtn, #prbtn{
+		font-size:180%;
+		width:200%;
+		font-weight:normal;
+	}
+	#prbtn{
+		margin-left:10%;
+	}
+	#social{
+		font-size:75px;
+	}
+	#quick{
+		font-size:2.4em;
+	}
+
+
+}
