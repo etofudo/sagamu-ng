@@ -71,6 +71,7 @@
             <a href="#">About Us</a>
             <a href="{{ route('list-business') }}">List Your Business</a>
             <a href="{{ route('new-to-sagamu') }}">New to Sagamu?</a>
+            <a href="{{ route('donate') }}" class="footer-donate-link">Support This Site ♥</a>
             <a href="#">Contact Us</a>
         </div>
     </div>

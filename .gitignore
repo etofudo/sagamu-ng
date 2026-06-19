@@ -1,9 +1,5 @@
 *.log
 /database/database.sqlite
-review_*.png
-snap_*.png
-shot_*.png
-.claude/settings.local.json
 .DS_Store
 .env
 .env.backup

@@ -33,7 +33,12 @@
                     <span class="tag-neighbourhood">{{ $listing->neighbourhood->name }}</span>
                 @endif
             </div>
-            <h1>{{ $listing->name }}</h1>
+            <h1>
+                {{ $listing->name }}
+                @if($listing->is_featured)
+                    <span class="featured-badge">Featured</span>
+                @endif
+            </h1>
             @if($listing->price_range && $listing->price_range !== 'na')
                 <p style="color:#aaa;margin:4px 0 0;">{{ $listing->price_symbol }}</p>
             @endif
@@ -113,9 +118,19 @@
             <p>Map coming soon</p>
         </div>
 
+        @if(!$listing->is_featured && $listing->status === 'active')
+        <div class="upgrade-cta-box">
+            <p class="upgrade-cta-label">Is this your business?</p>
+            <p>Get a <strong>Featured</strong> badge and appear at the top of your category.</p>
+            <a href="{{ route('listing.upgrade', $listing->slug) }}" class="upgrade-cta-btn">
+                Feature this listing &rarr;
+            </a>
+        </div>
+        @else
         <p class="claim-listing-link">
-            Is this your business? <a href="{{ route('list-business') }}">Claim or update this listing &rarr;</a>
+            Is this your business? <a href="{{ route('list-business') }}">Contact us to update this listing &rarr;</a>
         </p>
+        @endif
     </aside>
 </div>
 
