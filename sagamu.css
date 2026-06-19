@@ -47,10 +47,9 @@ img { display: block; max-width: 100%; }
 }
 
 #site-header {
-    text-align: center;
     background: var(--bg-white);
-    border-bottom: 10px solid var(--yellow);
-    padding: 6px 0 1px;
+    border-bottom: 3px solid var(--yellow);
+    padding: 0;
 }
 
 #site-header span {
@@ -953,11 +952,6 @@ img { display: block; max-width: 100%; }
 /* ── 480px ──────────────────────────────────────────────── */
 @media (max-width: 480px) {
 
-    /* Header */
-    #site-header {
-        padding: 8px 0 1px;
-    }
-
     /* Nav: tighter text */
     #mainnav a {
         font-size: 0.7rem;
@@ -1094,11 +1088,6 @@ img { display: block; max-width: 100%; }
    shrink the header and hero to save height.
    ─────────────────────────────────────────────────────────── */
 @media (orientation: landscape) and (max-height: 500px) {
-
-    /* Header: almost no padding, just brand + strip */
-    #site-header {
-        padding: 2px 0 0;
-    }
 
     /* Nav: revert to single scrollable row */
     #nav-inner {

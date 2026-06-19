@@ -1,5 +1,7 @@
 node_modules/
-*.png
+review_*.png
+snap_*.png
+shot_*.png
 findexpert.com.ng/
 backup/
 .claude/
