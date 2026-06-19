@@ -1,0 +1,4 @@
+---
+deployment:
+  tasks:
+    - /bin/echo "Sagamu.ng static site deployed"
