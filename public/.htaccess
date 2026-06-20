@@ -1,3 +1,11 @@
+# Block common attack probes — these files should never be web-accessible
+# on a properly configured Laravel app (document root = /public) but
+# we deny explicitly as a second layer of defence.
+<FilesMatch "^(\.env.*|\.git.*|composer\.(json|lock)|package\.json|artisan|phpunit\.xml|\.htpasswd|\.DS_Store|Thumbs\.db)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
