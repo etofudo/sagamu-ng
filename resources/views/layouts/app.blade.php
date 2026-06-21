@@ -3,17 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Sagamu.ng — Your Complete Guide to Life in Sagamu')</title>
-    <meta name="description" content="@yield('meta_description', 'Restaurants, sport, health, schools, business and neighbourhood life in Sagamu, Ogun State.')">
+
+    {{-- ── PRIMARY META ──────────────────────────────────────────── --}}
+    <title>@yield('seo_title', @yield('title', 'Sagamu.ng — Sagamu\'s Premier City Guide'))</title>
+    <meta name="description" content="@yield('meta_description', 'Sagamu.ng is Nigeria\'s premier city guide for Sagamu, Ogun State. Find restaurants, schools, hospitals, businesses, and neighbourhood guides — all in one place.')">
+    <link rel="canonical" href="@yield('canonical', url()->current())">
+    <meta name="robots" content="@yield('robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1')">
+    <meta name="google-site-verification" content="M9-VOSvnJoUqekR9MqocUop2RXfb0RIKDqrA7X1eZoQ">
+    <meta name="author" content="Sagamu.ng">
+    <meta name="publisher" content="Sagamu.ng">
+    <meta name="copyright" content="Sagamu.ng">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="3 days">
+    <meta name="rating" content="general">
+
+    {{-- ── GEO META (local SEO signal) ───────────────────────────── --}}
+    <meta name="geo.region" content="NG-OG">
+    <meta name="geo.placename" content="Sagamu, Ogun State, Nigeria">
+    <meta name="geo.position" content="6.8416;3.6479">
+    <meta name="ICBM" content="6.8416, 3.6479">
+
+    {{-- ── OPEN GRAPH (WhatsApp, Facebook, LinkedIn previews) ────── --}}
+    <meta property="og:site_name" content="Sagamu.ng">
+    <meta property="og:locale" content="en_NG">
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:title" content="@yield('og_title', @yield('title', 'Sagamu.ng — Sagamu\'s Premier City Guide'))">
+    <meta property="og:description" content="@yield('og_description', @yield('meta_description', 'Nigeria\'s premier city guide for Sagamu, Ogun State.'))">
+    <meta property="og:url" content="@yield('canonical', url()->current())">
+    <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="@yield('og_image_alt', 'Sagamu.ng — Sagamu\'s Premier City Guide')">
+
+    {{-- ── TWITTER / X CARD ───────────────────────────────────────── --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@sagamung">
+    <meta name="twitter:title" content="@yield('og_title', @yield('title', 'Sagamu.ng'))">
+    <meta name="twitter:description" content="@yield('og_description', @yield('meta_description', 'Nigeria\'s premier city guide for Sagamu, Ogun State.'))">
+    <meta name="twitter:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+
+    {{-- ── SITEMAP DISCOVERY ──────────────────────────────────────── --}}
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ url('/sitemap.xml') }}">
+
+    {{-- ── FONTS & ICONS ──────────────────────────────────────────── --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    {{-- ── STYLESHEETS ─────────────────────────────────────────────── --}}
     <link rel="stylesheet" href="{{ asset('css/sagamu.css') }}">
     @hasSection('inner_page')
     <link rel="stylesheet" href="{{ asset('css/sagamu-pages.css') }}">
     @endif
     @stack('styles')
+
+    {{-- ── JSON-LD STRUCTURED DATA ────────────────────────────────── --}}
+    {{-- Organisation + WebSite schema on every page --}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "{{ url('/') }}/#organization",
+                "name": "Sagamu.ng",
+                "alternateName": "Sagamu City Guide",
+                "url": "{{ url('/') }}",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "{{ asset('images/og-default.jpg') }}",
+                    "width": 1200,
+                    "height": 630
+                },
+                "description": "Nigeria's premier city guide for Sagamu, Ogun State — restaurants, schools, healthcare, businesses and neighbourhood guides.",
+                "areaServed": {
+                    "@type": "City",
+                    "name": "Sagamu",
+                    "containedInPlace": {
+                        "@type": "State",
+                        "name": "Ogun State",
+                        "containedInPlace": {
+                            "@type": "Country",
+                            "name": "Nigeria"
+                        }
+                    }
+                },
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "email": "hello@sagamu.ng",
+                    "contactType": "customer service",
+                    "availableLanguage": "English"
+                }
+            },
+            {
+                "@type": "WebSite",
+                "@id": "{{ url('/') }}/#website",
+                "url": "{{ url('/') }}",
+                "name": "Sagamu.ng",
+                "description": "Nigeria's premier city guide for Sagamu, Ogun State",
+                "publisher": { "@id": "{{ url('/') }}/#organization" },
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": {
+                        "@type": "EntryPoint",
+                        "urlTemplate": "{{ url('/search') }}?q={search_term_string}"
+                    },
+                    "query-input": "required name=search_term_string"
+                }
+            }
+        ]
+    }
+    </script>
+
+    {{-- Page-specific schema pushed from individual views --}}
+    @stack('schema')
 </head>
 <body>
 
@@ -76,7 +180,7 @@
         </div>
     </div>
     <div id="footer-bottom">
-        <span>&copy; {{ date('Y') }} Sagamu.ng. Your City, Your Opportunity.</span>
+        <span>&copy; {{ date('Y') }} Sagamu.ng — Nigeria's Premier City Guide for Sagamu, Ogun State.</span>
         <div class="social-icons">
             <a href="#" title="Facebook"><i class="fa fa-facebook"></i></a>
             <a href="#" title="Instagram"><i class="fa fa-instagram"></i></a>
