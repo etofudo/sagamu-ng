@@ -4,11 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    @php
+        $pageTitle  = trim($__env->yieldContent('title'))            ?: "Sagamu.ng — Sagamu's Premier City Guide";
+        $metaDesc   = trim($__env->yieldContent('meta_description')) ?: "Sagamu.ng is Nigeria's premier city guide for Sagamu, Ogun State. Find restaurants, schools, hospitals, businesses, and neighbourhood guides — all in one place.";
+        $canonical  = trim($__env->yieldContent('canonical'))        ?: url()->current();
+        $robots     = trim($__env->yieldContent('robots'))           ?: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
+        $ogType     = trim($__env->yieldContent('og_type'))          ?: 'website';
+        $ogImage    = trim($__env->yieldContent('og_image'))         ?: asset('images/og-default.jpg');
+        $ogImageAlt = trim($__env->yieldContent('og_image_alt'))     ?: "Sagamu.ng — Sagamu's Premier City Guide";
+    @endphp
+
     {{-- ── PRIMARY META ──────────────────────────────────────────── --}}
-    <title>@yield('seo_title', @yield('title', 'Sagamu.ng — Sagamu\'s Premier City Guide'))</title>
-    <meta name="description" content="@yield('meta_description', 'Sagamu.ng is Nigeria\'s premier city guide for Sagamu, Ogun State. Find restaurants, schools, hospitals, businesses, and neighbourhood guides — all in one place.')">
-    <link rel="canonical" href="@yield('canonical', url()->current())">
-    <meta name="robots" content="@yield('robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1')">
+    <title>{{ $pageTitle }}</title>
+    <meta name="description" content="{{ $metaDesc }}">
+    <link rel="canonical" href="{{ $canonical }}">
+    <meta name="robots" content="{{ $robots }}">
     <meta name="google-site-verification" content="M9-VOSvnJoUqekR9MqocUop2RXfb0RIKDqrA7X1eZoQ">
     <meta name="author" content="Sagamu.ng">
     <meta name="publisher" content="Sagamu.ng">
@@ -26,21 +36,21 @@
     {{-- ── OPEN GRAPH (WhatsApp, Facebook, LinkedIn previews) ────── --}}
     <meta property="og:site_name" content="Sagamu.ng">
     <meta property="og:locale" content="en_NG">
-    <meta property="og:type" content="@yield('og_type', 'website')">
-    <meta property="og:title" content="@yield('og_title', @yield('title', 'Sagamu.ng — Sagamu\'s Premier City Guide'))">
-    <meta property="og:description" content="@yield('og_description', @yield('meta_description', 'Nigeria\'s premier city guide for Sagamu, Ogun State.'))">
-    <meta property="og:url" content="@yield('canonical', url()->current())">
-    <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+    <meta property="og:type" content="{{ $ogType }}">
+    <meta property="og:title" content="{{ $pageTitle }}">
+    <meta property="og:description" content="{{ $metaDesc }}">
+    <meta property="og:url" content="{{ $canonical }}">
+    <meta property="og:image" content="{{ $ogImage }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="@yield('og_image_alt', 'Sagamu.ng — Sagamu\'s Premier City Guide')">
+    <meta property="og:image:alt" content="{{ $ogImageAlt }}">
 
     {{-- ── TWITTER / X CARD ───────────────────────────────────────── --}}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@sagamung">
-    <meta name="twitter:title" content="@yield('og_title', @yield('title', 'Sagamu.ng'))">
-    <meta name="twitter:description" content="@yield('og_description', @yield('meta_description', 'Nigeria\'s premier city guide for Sagamu, Ogun State.'))">
-    <meta name="twitter:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+    <meta name="twitter:site" content="@@sagamung">
+    <meta name="twitter:title" content="{{ $pageTitle }}">
+    <meta name="twitter:description" content="{{ $metaDesc }}">
+    <meta name="twitter:image" content="{{ $ogImage }}">
 
     {{-- ── SITEMAP DISCOVERY ──────────────────────────────────────── --}}
     <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ url('/sitemap.xml') }}">
