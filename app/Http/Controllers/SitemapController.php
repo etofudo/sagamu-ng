@@ -12,7 +12,7 @@ class SitemapController extends Controller
 {
     public function index(): Response
     {
-        $listings       = Listing::published()->latest('updated_at')->get(['slug', 'updated_at']);
+        $listings       = Listing::published()->latest('updated_at')->get(['slug', 'name', 'hero_image', 'updated_at']);
         $articles       = Article::where('is_published', true)->latest('updated_at')->get(['slug', 'updated_at']);
         $categories     = Category::where('is_active', true)->get(['slug', 'updated_at']);
         $neighbourhoods = Neighbourhood::where('is_published', true)->get(['slug', 'updated_at']);
