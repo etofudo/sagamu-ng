@@ -4,21 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    @php
-        $pageTitle  = trim($__env->yieldContent('title'))            ?: "Sagamu.ng — Sagamu's Premier City Guide";
-        $metaDesc   = trim($__env->yieldContent('meta_description')) ?: "Sagamu.ng is Nigeria's premier city guide for Sagamu, Ogun State. Find restaurants, schools, hospitals, businesses, and neighbourhood guides — all in one place.";
-        $canonical  = trim($__env->yieldContent('canonical'))        ?: url()->current();
-        $robots     = trim($__env->yieldContent('robots'))           ?: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
-        $ogType     = trim($__env->yieldContent('og_type'))          ?: 'website';
-        $ogImage    = trim($__env->yieldContent('og_image'))         ?: asset('images/og-default.jpg');
-        $ogImageAlt = trim($__env->yieldContent('og_image_alt'))     ?: "Sagamu.ng — Sagamu's Premier City Guide";
-    @endphp
-
     {{-- ── PRIMARY META ──────────────────────────────────────────── --}}
-    <title>{{ $pageTitle }}</title>
-    <meta name="description" content="{{ $metaDesc }}">
-    <link rel="canonical" href="{{ $canonical }}">
-    <meta name="robots" content="{{ $robots }}">
+    <title>@yield('title', "Sagamu.ng — Nigeria's Premier City Guide for Sagamu, Ogun State")</title>
+    <meta name="description" content="@yield('meta_description', "Sagamu.ng is Nigeria's premier city guide for Sagamu, Ogun State. Find restaurants, schools, hospitals, businesses, and neighbourhood guides — all in one place.")">
+    <link rel="canonical" href="@yield('canonical', url()->current())">
+    <meta name="robots" content="@yield('robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1')">
     <meta name="google-site-verification" content="M9-VOSvnJoUqekR9MqocUop2RXfb0RIKDqrA7X1eZoQ">
     <meta name="author" content="Sagamu.ng">
     <meta name="publisher" content="Sagamu.ng">
@@ -36,21 +26,21 @@
     {{-- ── OPEN GRAPH (WhatsApp, Facebook, LinkedIn previews) ────── --}}
     <meta property="og:site_name" content="Sagamu.ng">
     <meta property="og:locale" content="en_NG">
-    <meta property="og:type" content="{{ $ogType }}">
-    <meta property="og:title" content="{{ $pageTitle }}">
-    <meta property="og:description" content="{{ $metaDesc }}">
-    <meta property="og:url" content="{{ $canonical }}">
-    <meta property="og:image" content="{{ $ogImage }}">
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:title" content="@yield('title', "Sagamu.ng — Nigeria's Premier City Guide")">
+    <meta property="og:description" content="@yield('meta_description', "Nigeria's premier city guide for Sagamu, Ogun State.")">
+    <meta property="og:url" content="@yield('canonical', url()->current())">
+    <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="{{ $ogImageAlt }}">
+    <meta property="og:image:alt" content="@yield('og_image_alt', "Sagamu.ng — Nigeria's Premier City Guide")">
 
     {{-- ── TWITTER / X CARD ───────────────────────────────────────── --}}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@@sagamung">
-    <meta name="twitter:title" content="{{ $pageTitle }}">
-    <meta name="twitter:description" content="{{ $metaDesc }}">
-    <meta name="twitter:image" content="{{ $ogImage }}">
+    <meta name="twitter:title" content="@yield('title', 'Sagamu.ng')">
+    <meta name="twitter:description" content="@yield('meta_description', "Nigeria's premier city guide for Sagamu, Ogun State.")">
+    <meta name="twitter:image" content="@yield('og_image', asset('images/og-default.jpg'))">
 
     {{-- ── SITEMAP DISCOVERY ──────────────────────────────────────── --}}
     <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ url('/sitemap.xml') }}">
@@ -69,54 +59,54 @@
     @stack('styles')
 
     {{-- ── JSON-LD STRUCTURED DATA ────────────────────────────────── --}}
-    {{-- Organisation + WebSite schema on every page --}}
+    {{-- @@ escapes @ so Blade does not treat @context/@type/@id as directives --}}
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@graph": [
+        "@@context": "https://schema.org",
+        "@@graph": [
             {
-                "@type": "Organization",
-                "@id": "{{ url('/') }}/#organization",
+                "@@type": "Organization",
+                "@@id": "{{ url('/') }}/#organization",
                 "name": "Sagamu.ng",
                 "alternateName": "Sagamu City Guide",
                 "url": "{{ url('/') }}",
                 "logo": {
-                    "@type": "ImageObject",
+                    "@@type": "ImageObject",
                     "url": "{{ asset('images/og-default.jpg') }}",
                     "width": 1200,
                     "height": 630
                 },
-                "description": "Nigeria's premier city guide for Sagamu, Ogun State — restaurants, schools, healthcare, businesses and neighbourhood guides.",
+                "description": "Nigeria's premier city guide for Sagamu, Ogun State.",
                 "areaServed": {
-                    "@type": "City",
+                    "@@type": "City",
                     "name": "Sagamu",
                     "containedInPlace": {
-                        "@type": "State",
+                        "@@type": "State",
                         "name": "Ogun State",
                         "containedInPlace": {
-                            "@type": "Country",
+                            "@@type": "Country",
                             "name": "Nigeria"
                         }
                     }
                 },
                 "contactPoint": {
-                    "@type": "ContactPoint",
+                    "@@type": "ContactPoint",
                     "email": "hello@sagamu.ng",
                     "contactType": "customer service",
                     "availableLanguage": "English"
                 }
             },
             {
-                "@type": "WebSite",
-                "@id": "{{ url('/') }}/#website",
+                "@@type": "WebSite",
+                "@@id": "{{ url('/') }}/#website",
                 "url": "{{ url('/') }}",
                 "name": "Sagamu.ng",
                 "description": "Nigeria's premier city guide for Sagamu, Ogun State",
-                "publisher": { "@id": "{{ url('/') }}/#organization" },
+                "publisher": { "@@id": "{{ url('/') }}/#organization" },
                 "potentialAction": {
-                    "@type": "SearchAction",
+                    "@@type": "SearchAction",
                     "target": {
-                        "@type": "EntryPoint",
+                        "@@type": "EntryPoint",
                         "urlTemplate": "{{ url('/search') }}?q={search_term_string}"
                     },
                     "query-input": "required name=search_term_string"
@@ -185,12 +175,12 @@
             <a href="#">About Us</a>
             <a href="{{ route('list-business') }}">List Your Business</a>
             <a href="{{ route('new-to-sagamu') }}">New to Sagamu?</a>
-            <a href="{{ route('donate') }}" class="footer-donate-link">Support This Site ♥</a>
+            <a href="{{ route('donate') }}" class="footer-donate-link">Support This Site &#9829;</a>
             <a href="#">Contact Us</a>
         </div>
     </div>
     <div id="footer-bottom">
-        <span>&copy; {{ date('Y') }} Sagamu.ng — Nigeria's Premier City Guide for Sagamu, Ogun State.</span>
+        <span>&copy; {{ date('Y') }} Sagamu.ng &mdash; Nigeria's Premier City Guide for Sagamu, Ogun State.</span>
         <div class="social-icons">
             <a href="#" title="Facebook"><i class="fa fa-facebook"></i></a>
             <a href="#" title="Instagram"><i class="fa fa-instagram"></i></a>
