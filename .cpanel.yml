@@ -1,4 +1,5 @@
 ---
 deployment:
   tasks:
-    - /bin/echo "Sagamu.ng static site deployed"
+    - export DEPLOYPATH=/home/barnesbu/public_html/sagamu.ng
+    - /usr/local/bin/php $DEPLOYPATH/artisan optimize:clear
