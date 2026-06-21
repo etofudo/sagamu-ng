@@ -1,8 +1,56 @@
 @extends('layouts.app')
 @section('inner_page', true)
 
-@section('title', $listing->name . ' — Sagamu.ng')
-@section('meta_description', Str::limit($listing->description, 160))
+@section('title', $listing->name . ' — ' . ($listing->category->name ?? 'Business') . ' in Sagamu | Sagamu.ng')
+@section('meta_description', Str::limit(strip_tags($listing->description), 155) . ' Located in Sagamu, Ogun State, Nigeria.')
+@section('canonical', route('listing.show', $listing->slug))
+@section('og_type', 'business.business')
+@section('og_image', $listing->hero_image ?? asset('images/og-default.jpg'))
+@section('og_image_alt', $listing->name . ' — ' . ($listing->category->name ?? 'Business') . ' in Sagamu')
+
+@push('schema')
+@php
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type'    => $listing->schema_type,
+        '@id'      => route('listing.show', $listing->slug) . '#business',
+        'name'     => $listing->name,
+        'description' => \Illuminate\Support\Str::limit(strip_tags($listing->description), 300),
+        'url'      => route('listing.show', $listing->slug),
+        'geo'      => ['@type' => 'GeoCoordinates', 'latitude' => '6.8416', 'longitude' => '3.6479'],
+        'hasMap'   => 'https://www.google.com/maps/search/' . urlencode(($listing->address ?? $listing->name) . ' Sagamu Ogun State Nigeria'),
+        'areaServed' => ['@type' => 'City', 'name' => 'Sagamu'],
+        'containedInPlace' => [
+            '@type' => 'City',
+            'name'  => 'Sagamu',
+            'containedInPlace' => ['@type' => 'State', 'name' => 'Ogun State',
+                'containedInPlace' => ['@type' => 'Country', 'name' => 'Nigeria']],
+        ],
+    ];
+    if ($listing->hero_image)   $schema['image']        = $listing->hero_image;
+    if ($listing->address)      $schema['address']      = ['@type' => 'PostalAddress', 'streetAddress' => $listing->address, 'addressLocality' => 'Sagamu', 'addressRegion' => 'Ogun State', 'addressCountry' => 'NG'];
+    if ($listing->phone)        $schema['telephone']    = $listing->phone;
+    if ($listing->website)      $schema['sameAs']       = $listing->website;
+    if ($listing->opening_hours) $schema['openingHours'] = $listing->opening_hours;
+    if ($listing->price_range && $listing->price_range !== 'na') $schema['priceRange'] = $listing->price_symbol;
+
+    $breadcrumb = [
+        '@context' => 'https://schema.org',
+        '@type'    => 'BreadcrumbList',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => url('/')],
+        ],
+    ];
+    if ($listing->category) {
+        $breadcrumb['itemListElement'][] = ['@type' => 'ListItem', 'position' => 2, 'name' => $listing->category->name, 'item' => route('category.show', $listing->category->slug)];
+        $breadcrumb['itemListElement'][] = ['@type' => 'ListItem', 'position' => 3, 'name' => $listing->name, 'item' => route('listing.show', $listing->slug)];
+    } else {
+        $breadcrumb['itemListElement'][] = ['@type' => 'ListItem', 'position' => 2, 'name' => $listing->name, 'item' => route('listing.show', $listing->slug)];
+    }
+@endphp
+<script type="application/ld+json">{{ json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) }}</script>
+<script type="application/ld+json">{{ json_encode($breadcrumb, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) }}</script>
+@endpush
 
 @section('content')
 

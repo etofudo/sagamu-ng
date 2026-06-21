@@ -1,7 +1,42 @@
 @extends('layouts.app')
 @section('inner_page', true)
 
-@section('title', $category->name . ' in Sagamu — Sagamu.ng')
+@section('title', $category->name . ' in Sagamu, Ogun State — Complete Directory | Sagamu.ng')
+@section('meta_description', 'Find the best ' . strtolower($category->name) . ' in Sagamu, Ogun State. Browse ' . $listings->total() . ' listings with addresses, phone numbers and reviews — Sagamu.ng.')
+@section('canonical', route('category.show', $category->slug))
+
+@push('schema')
+@php
+    $breadcrumb = [
+        '@context' => 'https://schema.org',
+        '@type'    => 'BreadcrumbList',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home',              'item' => url('/')],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => $category->name . ' in Sagamu', 'item' => route('category.show', $category->slug)],
+        ],
+    ];
+
+    $itemList = [
+        '@context'       => 'https://schema.org',
+        '@type'          => 'ItemList',
+        'name'           => $category->name . ' in Sagamu',
+        'description'    => 'Complete directory of ' . strtolower($category->name) . ' businesses in Sagamu, Ogun State, Nigeria.',
+        'url'            => route('category.show', $category->slug),
+        'numberOfItems'  => $listings->total(),
+        'itemListElement' => [],
+    ];
+    foreach ($listings->take(10) as $i => $item) {
+        $itemList['itemListElement'][] = [
+            '@type'    => 'ListItem',
+            'position' => $i + 1,
+            'name'     => $item->name,
+            'url'      => route('listing.show', $item->slug),
+        ];
+    }
+@endphp
+<script type="application/ld+json">{{ json_encode($breadcrumb, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) }}</script>
+<script type="application/ld+json">{{ json_encode($itemList,   JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) }}</script>
+@endpush
 
 @section('content')
 

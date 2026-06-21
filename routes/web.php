@@ -9,6 +9,7 @@ use App\Http\Controllers\NeighbourhoodController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\DonateController;
+use App\Http\Controllers\SitemapController;
 
 Route::get('/',                                   [HomeController::class, 'index'])->name('home');
 Route::get('/article/{article:slug}',             [ArticleController::class, 'show'])->name('article.show');
@@ -28,3 +29,6 @@ Route::get('/listing/{listing:slug}/upgrade/callback', [ListingUpgradeController
 Route::get('/support-sagamu',          [DonateController::class, 'show'])->name('donate');
 Route::post('/support-sagamu',         [DonateController::class, 'initiate'])->name('donate.initiate');
 Route::get('/support-sagamu/thank-you',[DonateController::class, 'callback'])->name('donate.callback');
+
+// SEO
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');

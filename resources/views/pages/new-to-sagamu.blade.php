@@ -1,7 +1,61 @@
 @extends('layouts.app')
 @section('inner_page', true)
 
-@section('title', 'New to Sagamu? Start Here — Your Relocation Guide — Sagamu.ng')
+@section('title', 'New to Sagamu? Complete Relocation Guide — Schools, Healthcare, Where to Live | Sagamu.ng')
+@section('meta_description', 'Moving to Sagamu, Ogun State? Find schools, healthcare (OOUTH), neighbourhoods, restaurants and transport in one guide. Everything you need to settle in Sagamu quickly.')
+@section('canonical', route('new-to-sagamu'))
+
+@push('schema')
+@php
+    $faq = [
+        '@context'   => 'https://schema.org',
+        '@type'      => 'FAQPage',
+        'mainEntity' => [
+            [
+                '@type'          => 'Question',
+                'name'           => 'What are the best schools in Sagamu?',
+                'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Remo Secondary School is one of the most established public secondary schools in Ogun State. Mayflower School in nearby Ikenne-Remo (founded by Tai Solarin) is a well-regarded private boarding school. Several private schools in Sagamu LGA cater to primary and secondary levels.'],
+            ],
+            [
+                '@type'          => 'Question',
+                'name'           => 'Is OOUTH open to the public?',
+                'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Yes. Olabisi Onabanjo University Teaching Hospital (OOUTH) in Sagamu is open to all members of the public. It is not referral-only. Walk-in outpatient registration is available and the 24-hour Accident and Emergency department is staffed around the clock.'],
+            ],
+            [
+                '@type'          => 'Question',
+                'name'           => 'Which neighbourhood in Sagamu is best for professionals?',
+                'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Most professionals relocating to Sagamu choose Makun Sagamu or the expressway corridor. It has the best access to Lagos, newer housing stock, and a growing number of shops and restaurants. Rental prices are higher than other parts of Sagamu but substantially below Lagos equivalents.'],
+            ],
+            [
+                '@type'          => 'Question',
+                'name'           => 'How do I get from Sagamu to Lagos?',
+                'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Buses to Lagos depart from Sagamu Bus Park under the Sagamu interchange from early morning. Sagamu is approximately 60km from Lagos Island via the Lagos-Ibadan Expressway. Private taxis and ride-hailing apps also operate on this route.'],
+            ],
+            [
+                '@type'          => 'Question',
+                'name'           => 'Where can I eat in Sagamu?',
+                'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'The Akarigbo Road food strip in Sagamu Town has everything from jollof rice to late-night pepper soup. For sit-down dining, The Junction Kitchen in Makun is recommended. The Sagamu-Ore Road strip is known for roadside catfish pepper soup.'],
+            ],
+            [
+                '@type'          => 'Question',
+                'name'           => 'Is Sagamu safe to live in?',
+                'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Sagamu is generally considered one of the more stable and liveable towns in Ogun State. It has a functioning teaching hospital (OOUTH), established schools, and a growing commercial sector. The Sagamu Divisional Police HQ and Ogun State Fire Service operate in the town.'],
+            ],
+        ],
+    ];
+
+    $breadcrumb = [
+        '@context' => 'https://schema.org',
+        '@type'    => 'BreadcrumbList',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home',          'item' => url('/')],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => 'New to Sagamu?','item' => route('new-to-sagamu')],
+        ],
+    ];
+@endphp
+<script type="application/ld+json">{{ json_encode($faq,        JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) }}</script>
+<script type="application/ld+json">{{ json_encode($breadcrumb, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) }}</script>
+@endpush
 
 @section('content')
 

@@ -1,2 +1,11 @@
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /admin/
+Disallow: /support-sagamu/thank-you
+Disallow: /listing/*/upgrade
+Disallow: /listing/*/upgrade/callback
+
+# Allow crawling of all public pages
+Allow: /
+
+Sitemap: https://sagamu.ng/sitemap.xml

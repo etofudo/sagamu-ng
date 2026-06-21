@@ -1,6 +1,35 @@
 @extends('layouts.app')
 
-@section('title', 'Sagamu.ng — Your Complete Guide to Life in Sagamu')
+@section('title', 'Sagamu.ng — Nigeria\'s Premier City Guide for Sagamu, Ogun State')
+@section('meta_description', 'Sagamu.ng is Nigeria\'s number one city guide for Sagamu, Ogun State. Find restaurants, schools, hospitals, businesses, neighbourhood guides and local news — all in one place.')
+@section('canonical', url('/'))
+
+@push('schema')
+@php
+    $webPage = [
+        '@context'    => 'https://schema.org',
+        '@type'       => 'WebPage',
+        '@id'         => url('/') . '/#webpage',
+        'url'         => url('/'),
+        'name'        => "Sagamu.ng — Nigeria's Premier City Guide for Sagamu, Ogun State",
+        'description' => "Sagamu.ng is Nigeria's number one city guide for Sagamu, Ogun State. Find restaurants, schools, hospitals, businesses, neighbourhood guides and local news.",
+        'isPartOf'    => ['@id' => url('/') . '/#website'],
+        'about'       => [
+            '@type' => 'City',
+            'name'  => 'Sagamu',
+            'containedInPlace' => ['@type' => 'State', 'name' => 'Ogun State',
+                'containedInPlace' => ['@type' => 'Country', 'name' => 'Nigeria']],
+        ],
+        'mentions'    => [
+            ['@type' => 'Hospital',       'name' => 'Olabisi Onabanjo University Teaching Hospital', 'alternateName' => 'OOUTH', 'address' => ['@type' => 'PostalAddress', 'addressLocality' => 'Sagamu', 'addressRegion' => 'Ogun State', 'addressCountry' => 'NG']],
+            ['@type' => 'SportsTeam',     'name' => 'Remo Stars FC', 'sport' => 'Football'],
+            ['@type' => 'LandmarksOrHistoricalBuildings', 'name' => 'Sagamu Industrial Estate'],
+        ],
+        'speakable'   => ['@type' => 'SpeakableSpecification', 'cssSelector' => ['#hero-strip', '#main-wrap .section-title']],
+    ];
+@endphp
+<script type="application/ld+json">{{ json_encode($webPage, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) }}</script>
+@endpush
 
 @section('content')
 

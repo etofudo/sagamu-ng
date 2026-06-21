@@ -1,7 +1,45 @@
 @extends('layouts.app')
 @section('inner_page', true)
 
-@section('title', $neighbourhood->name . ' — Neighbourhood Guide — Sagamu.ng')
+@section('title', $neighbourhood->name . ' — Neighbourhood Guide, Sagamu | Sagamu.ng')
+@section('meta_description', ($neighbourhood->character ? $neighbourhood->character . '. ' : '') . 'Complete guide to living in ' . $neighbourhood->name . ', Sagamu — rentals, schools, healthcare, restaurants and transport. Sagamu.ng.')
+@section('canonical', route('neighbourhood.show', $neighbourhood->slug))
+@section('og_image', $neighbourhood->hero_image ?? asset('images/og-default.jpg'))
+@section('og_image_alt', $neighbourhood->name . ' — Sagamu Neighbourhood Guide')
+
+@push('schema')
+@php
+    $schema = [
+        '@context'   => 'https://schema.org',
+        '@type'      => 'Place',
+        '@id'        => route('neighbourhood.show', $neighbourhood->slug) . '#place',
+        'name'       => $neighbourhood->name . ', Sagamu',
+        'description' => strip_tags($neighbourhood->description ?? ($neighbourhood->character ?? 'A neighbourhood in Sagamu, Ogun State, Nigeria.')),
+        'url'        => route('neighbourhood.show', $neighbourhood->slug),
+        'geo'        => ['@type' => 'GeoCoordinates', 'latitude' => '6.8416', 'longitude' => '3.6479'],
+        'containedInPlace' => [
+            '@type' => 'City',
+            'name'  => 'Sagamu',
+            'containedInPlace' => ['@type' => 'State', 'name' => 'Ogun State',
+                'containedInPlace' => ['@type' => 'Country', 'name' => 'Nigeria']],
+        ],
+    ];
+    if ($neighbourhood->hero_image) $schema['image'] = $neighbourhood->hero_image;
+    if ($neighbourhood->best_for)   $schema['amenityFeature'] = [['@type' => 'LocationFeatureSpecification', 'name' => 'Best for', 'value' => $neighbourhood->best_for]];
+
+    $breadcrumb = [
+        '@context' => 'https://schema.org',
+        '@type'    => 'BreadcrumbList',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home',           'item' => url('/')],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => 'Neighbourhoods', 'item' => url('/#neighbourhoods')],
+            ['@type' => 'ListItem', 'position' => 3, 'name' => $neighbourhood->name, 'item' => route('neighbourhood.show', $neighbourhood->slug)],
+        ],
+    ];
+@endphp
+<script type="application/ld+json">{{ json_encode($schema,     JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) }}</script>
+<script type="application/ld+json">{{ json_encode($breadcrumb, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) }}</script>
+@endpush
 
 @section('content')
 
