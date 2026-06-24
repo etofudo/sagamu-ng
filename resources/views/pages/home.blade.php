@@ -28,7 +28,7 @@
         'speakable'   => ['@type' => 'SpeakableSpecification', 'cssSelector' => ['#hero-strip', '#main-wrap .section-title']],
     ];
 @endphp
-<script type="application/ld+json">{{ json_encode($webPage, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) }}</script>
+<script type="application/ld+json">{!! json_encode($webPage, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}</script>
 @endpush
 
 @section('content')
